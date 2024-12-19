@@ -14,7 +14,7 @@ class SignUpBar extends StatelessWidget {
           style: GoogleFonts.inter(
               fontWeight: FontWeight.w600,
               fontSize: 28,
-              color: AppColors.test1Colors),
+              color: AppColors.h1),
         ),
         Text(
           'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum.',
