@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
-void main(){
+import 'package:your_ears_app/app/my_app.dart';
+
+void main() {
   runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
 }
