@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:your_ears_app/pages/boarding/presentation/screens/content_model.dart';
+import 'package:your_ears_app/routes/routes_imports.gr.dart';
 import 'package:your_ears_app/utils/color.dart';
 import 'package:your_ears_app/utils/media_query.dart';
 
@@ -129,7 +130,9 @@ class _OnBoardingState extends State<OnBoarding> {
             child: Row(
               children: [
                 InkWell(
-                  onTap: () {},
+                  highlightColor: Colors.transparent,
+                  splashColor: Colors.transparent,
+                  onTap: () {context.router.replace(SignUpRoute());},
                   child: Text(
                     'Skip',
                     style: GoogleFonts.inter(
@@ -140,6 +143,8 @@ class _OnBoardingState extends State<OnBoarding> {
                 ),
                 Spacer(),
                 InkWell(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
                   onTap: () {
                     if (currentIndex < contents.length - 1) {
                       _controller.nextPage(
@@ -147,8 +152,7 @@ class _OnBoardingState extends State<OnBoarding> {
                         curve: Curves.easeIn,
                       );
                     } else {
-                      // Navigator.pushReplacementNamed(
-                      //     context, '/login');
+                      context.router.replace(SignUpRoute());
                     }
                   },
                   child: Container(

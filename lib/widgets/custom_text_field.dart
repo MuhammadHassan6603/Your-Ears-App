@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:your_ears_app/utils/color.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -29,40 +30,31 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       obscureText: isPass,
-      style: const TextStyle(
-        color: Colors.black,
-        fontFamily: "mulish",
-        fontSize: 14,
-        fontWeight: FontWeight.w300,
-      ),
+      style: GoogleFonts.inter(),
       onTap: onTap,
       keyboardType: keyboardtype,
       readOnly: isreadonly,
       decoration: InputDecoration(
         border: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: AppColors.fieldBoderColors,
-            width: 1.0,
-          ),
+          // borderSide: BorderSide(
+          //   color: AppColors.fieldBoderColors,
+          //   width: 1.0,
+          // ),
+          borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(14),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: const BorderSide(
             color: Colors.blue, // Change this to your desired focus color
-            width: 2.0, // Border width when focused
+            width: 1.0, // Border width when focused
           ),
           borderRadius: BorderRadius.circular(14),
         ),
         filled: true,
         fillColor: AppColors.fillColors,
         hintText: text,
-        hintStyle: TextStyle(
-          color: AppColors.fieldtextColors,
-          fontFamily: 'mulish',
-          fontWeight: FontWeight.w400,
-          fontSize: 12,
-        ),
-        prefixIcon: Padding(
+        hintStyle: GoogleFonts.inter(),
+        prefixIcon:  Padding(
           padding: const EdgeInsets.only(top: 12.0, bottom: 12),
           child: icon,
         ),
