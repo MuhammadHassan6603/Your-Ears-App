@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:your_ears_app/pages/boarding/on_boarding.dart';
+import 'package:your_ears_app/routes/routes_imports.gr.dart';
 
 @RoutePage()
 class SplashScreen extends StatefulWidget {
@@ -9,6 +10,7 @@ class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
+
 class _SplashScreenState extends State<SplashScreen> {
   bool showLogo = false;
   @override
@@ -20,12 +22,10 @@ class _SplashScreenState extends State<SplashScreen> {
       });
     });
     Timer(const Duration(seconds: 2), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => OnBoarding()),
-      );
+      context.router.replace(SignUpRoute());
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,4 +44,3 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
-

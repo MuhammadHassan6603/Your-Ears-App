@@ -8,25 +8,33 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i3;
+import 'package:auto_route/auto_route.dart' as _i4;
 import 'package:your_ears_app/pages/boarding/on_boarding.dart' as _i1;
-import 'package:your_ears_app/pages/splash/splash.dart' as _i2;
+import 'package:your_ears_app/pages/sign_up/presentation/screen/sign_up.dart'
+    as _i2;
+import 'package:your_ears_app/pages/splash/splash.dart' as _i3;
 
-abstract class $AppRouter extends _i3.RootStackRouter {
+abstract class $AppRouter extends _i4.RootStackRouter {
   $AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, _i3.PageFactory> pagesMap = {
+  final Map<String, _i4.PageFactory> pagesMap = {
     OnBoardingRoute.name: (routeData) {
-      return _i3.AutoRoutePage<dynamic>(
+      return _i4.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i1.OnBoarding(),
       );
     },
-    SplashScreenRoute.name: (routeData) {
-      return _i3.AutoRoutePage<dynamic>(
+    SignUpRoute.name: (routeData) {
+      return _i4.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i2.SplashScreen(),
+        child: const _i2.SignUp(),
+      );
+    },
+    SplashScreenRoute.name: (routeData) {
+      return _i4.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i3.SplashScreen(),
       );
     },
   };
@@ -34,8 +42,8 @@ abstract class $AppRouter extends _i3.RootStackRouter {
 
 /// generated route for
 /// [_i1.OnBoarding]
-class OnBoardingRoute extends _i3.PageRouteInfo<void> {
-  const OnBoardingRoute({List<_i3.PageRouteInfo>? children})
+class OnBoardingRoute extends _i4.PageRouteInfo<void> {
+  const OnBoardingRoute({List<_i4.PageRouteInfo>? children})
       : super(
           OnBoardingRoute.name,
           initialChildren: children,
@@ -43,13 +51,27 @@ class OnBoardingRoute extends _i3.PageRouteInfo<void> {
 
   static const String name = 'OnBoardingRoute';
 
-  static const _i3.PageInfo<void> page = _i3.PageInfo<void>(name);
+  static const _i4.PageInfo<void> page = _i4.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i2.SplashScreen]
-class SplashScreenRoute extends _i3.PageRouteInfo<void> {
-  const SplashScreenRoute({List<_i3.PageRouteInfo>? children})
+/// [_i2.SignUp]
+class SignUpRoute extends _i4.PageRouteInfo<void> {
+  const SignUpRoute({List<_i4.PageRouteInfo>? children})
+      : super(
+          SignUpRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SignUpRoute';
+
+  static const _i4.PageInfo<void> page = _i4.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i3.SplashScreen]
+class SplashScreenRoute extends _i4.PageRouteInfo<void> {
+  const SplashScreenRoute({List<_i4.PageRouteInfo>? children})
       : super(
           SplashScreenRoute.name,
           initialChildren: children,
@@ -57,5 +79,5 @@ class SplashScreenRoute extends _i3.PageRouteInfo<void> {
 
   static const String name = 'SplashScreenRoute';
 
-  static const _i3.PageInfo<void> page = _i3.PageInfo<void>(name);
+  static const _i4.PageInfo<void> page = _i4.PageInfo<void>(name);
 }
