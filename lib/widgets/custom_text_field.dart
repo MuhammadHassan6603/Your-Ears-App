@@ -54,10 +54,10 @@ class CustomTextField extends StatelessWidget {
         fillColor: AppColors.fillColors,
         hintText: text,
         hintStyle: GoogleFonts.inter(),
-        prefixIcon:  Padding(
-          padding: const EdgeInsets.only(top: 12.0, bottom: 12),
-          child: icon,
-        ),
+        // prefixIcon:  Padding(
+        //   padding: const EdgeInsets.only(top: 12.0, bottom: 12),
+        //   child: icon,
+        // ),
         suffixIcon: xicon,
       ),
     );

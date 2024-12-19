@@ -11,7 +11,11 @@ class SignupTextField extends StatelessWidget {
       children: [
         CustomTextField(text: 'Name'),
         CustomTextField(text: 'Email/Phone Number'),
-        CustomTextField(text: 'Password'),
+        CustomTextField(
+          isPass: true,
+          text: 'Password',
+          xicon: Icon(Icons.visibility_off ),
+          ),
       ],
     );
   }
