@@ -10,11 +10,8 @@ class SignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
       backgroundColor: Colors.white,
-=======
       resizeToAvoidBottomInset: false,
->>>>>>> 13279aaf02415f5729d333474f918e780c71781b
       body: Column(
         children: [
           SizedBox(

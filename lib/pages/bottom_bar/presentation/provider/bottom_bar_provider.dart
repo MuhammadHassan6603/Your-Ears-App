@@ -4,7 +4,6 @@ import 'package:your_ears_app/pages/contact_us/presentation/screens/contact_us.d
 import 'package:your_ears_app/pages/home/presentation/screens/home.dart';
 import 'package:your_ears_app/pages/profile/presentation/screens/profile.dart';
 
-
 class BottomBarProvider with ChangeNotifier {
   int _selectedIndex = 0;
 

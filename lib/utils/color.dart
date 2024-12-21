@@ -11,7 +11,9 @@ class AppColors {
   static const Color blurColor = Color(0xff09A5DC1A);
   static const Color checktextColor = Color(0xff3B4054);
   static const Color checkbocColor = Color(0xffECECEC);
-
+  static const Color blueColor = Color(0xff09A5DC);
   static const Color whiteColor = Color(0xffFFFFFF);
+  static const Color containerTextColor = Color(0xffBBBBBB);
+  static const Color browseItemText = Color(0xff515151);
   static const Color blackCOlor = Colors.black;
 }
