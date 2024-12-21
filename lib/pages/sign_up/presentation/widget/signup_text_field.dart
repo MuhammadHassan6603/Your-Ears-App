@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:your_ears_app/pages/sign_up/presentation/widget/check_row.dart';
+import 'package:your_ears_app/routes/routes_imports.gr.dart';
 import 'package:your_ears_app/utils/color.dart';
 import 'package:your_ears_app/utils/images.dart';
 import 'package:your_ears_app/widgets/custom_button.dart';
@@ -37,27 +39,32 @@ class SignupTextField extends StatelessWidget {
         SizedBox(
           height: 32,
         ),
-        CustomButton(text: "Create Account"),
+        CustomButton(text: "Create Account",onTap: (){context.router.replace(SignInRoute());},),
         SizedBox(
           height: 28,
         ),
-        RichText(
-            text: TextSpan(children: [
-          TextSpan(
-            text: 'Already have an account?',
-            style: GoogleFonts.inter(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: AppColors.checktextColor),
-          ),
-          TextSpan(
-            text: ' Log In',
-            style: GoogleFonts.inter(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: AppColors.fieldBoderColors),
-          ),
-        ])),
+        GestureDetector(
+          onTap: () {
+            context.router.replace(SignInRoute());
+          },
+          child: RichText(
+              text: TextSpan(children: [
+            TextSpan(
+              text: 'Already have an account?',
+              style: GoogleFonts.inter(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.checktextColor),
+            ),
+            TextSpan(
+              text: ' Log In',
+              style: GoogleFonts.inter(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.fieldBoderColors),
+            ),
+          ])),
+        ),
       ]),
     );
   }

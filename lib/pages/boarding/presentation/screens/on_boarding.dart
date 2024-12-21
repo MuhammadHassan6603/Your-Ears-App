@@ -157,8 +157,7 @@ class _OnBoardingState extends State<OnBoarding> {
                             curve: Curves.easeIn,
                           );
                         } else {
-                          // context.router.replace(SignUpRoute());
-                          context.router.replace(BottomBarRoute());
+                          context.router.replace(SignUpRoute());
                         }
                       },
                       child: Container(

@@ -16,7 +16,12 @@ class CusttonContainer extends StatelessWidget {
             Radius.circular(10),
           ),
           color: AppColors.checkbocColor),
-      child: SvgPicture.asset(svgPicture),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgPicture.asset(svgPicture),
+        ],
+      ),
     );
   }
 }

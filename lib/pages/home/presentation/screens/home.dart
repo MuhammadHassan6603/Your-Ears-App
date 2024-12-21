@@ -47,9 +47,9 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: ClipOval(
                 child: Image.asset(
-                  'assets/images/profile.png',
-                  width: 45,
-                  height: 45,
+                  'assets/images/profile1.jpg',
+                  width: 40,
+                  height: 40,
                   fit: BoxFit.cover,
                 ),
               ),
