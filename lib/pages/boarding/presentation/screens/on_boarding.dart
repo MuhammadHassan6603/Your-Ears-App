@@ -40,7 +40,7 @@ class _OnBoardingState extends State<OnBoarding> {
           SizedBox(
             height: getHeight(context) * 0.7,
             child: PageView.builder(
-              // physics: const NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               controller: _controller,
               itemCount: contents.length,
               onPageChanged: (int index) {
