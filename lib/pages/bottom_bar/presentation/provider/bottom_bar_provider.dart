@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:your_ears_app/pages/calender/presentation/screens/calender.dart';
-import 'package:your_ears_app/pages/contact_us/presentation/screens/contact_us.dart';
+import 'package:your_ears_app/pages/contact_screen/presentation/screen/contact_screen.dart';
 import 'package:your_ears_app/pages/home/presentation/screens/home.dart';
 import 'package:your_ears_app/pages/profile/presentation/screens/profile.dart';
 
@@ -10,7 +10,7 @@ class BottomBarProvider with ChangeNotifier {
   final List<Widget> _screens = [
     const HomeScreen(),
     const CalenderScreen(),
-    const ContactUsScreen(),
+    const ContactScreen(),
     const ProfileScreen(),
   ];
 

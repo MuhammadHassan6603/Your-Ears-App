@@ -16,4 +16,9 @@ class AppColors {
   static const Color containerTextColor = Color(0xffBBBBBB);
   static const Color browseItemText = Color(0xff515151);
   static const Color blackCOlor = Colors.black;
+  static const Color textColor = Color(0xff9A9A9A);
+  static const Color appbarText = Color(0xff2C3131);
+  static const Color forgetColor = Color(0xff7C8BA0);
+  static const Color logocontainerColor = Color(0xff09A5DC);
+  static const Color conatinerblurColor = Color(0xff0000001A);
 }
