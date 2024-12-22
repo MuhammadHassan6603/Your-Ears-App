@@ -18,6 +18,10 @@ class ContactScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        backgroundColor: AppColors.whiteColor,
+        scrolledUnderElevation: 0,
+        elevation: 0,
+        primary: true,
         centerTitle: true,
         leading: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -33,18 +37,20 @@ class ContactScreen extends StatelessWidget {
               color: AppColors.appbarText),
         ),
       ),
-      body: Column(
-        children: [
-          LogoContainer(),
-          SizedBox(
-            height: 36,
-          ),
-          LoctionContact(),
-          SizedBox(
-            height: 38,
-          ),
-          TimeContat(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            LogoContainer(),
+            SizedBox(
+              height: 36,
+            ),
+            LoctionContact(),
+            SizedBox(
+              height: 38,
+            ),
+            TimeContat(),
+          ],
+        ),
       ),
     );
   }

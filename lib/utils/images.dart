@@ -17,4 +17,5 @@ class AppImages {
   static const String loader = "assets/icons/loader.svg";
   static const String backwordicon = "assets/icons/backword.svg";
   static const String loctionicon = "assets/icons/loction_icon.svg";
+  static const String downarrowicon = "assets/icons/downword.svg";
 }

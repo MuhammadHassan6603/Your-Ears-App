@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:your_ears_app/utils/color.dart';
 import 'package:your_ears_app/utils/images.dart';
 
 class LoctionContact extends StatelessWidget {
   const LoctionContact({super.key});
+  Future<void> _openGoogleMaps() async {
+    const googleMapsUrl =
+        "https://www.google.com/maps/search/?api=1&query=35+High+Street,+Caterham,+Surrey,+CR3+5UE,+United+Kingdom";
+    if (await canLaunch(googleMapsUrl)) {
+      await launch(googleMapsUrl);
+    } else {
+      throw "Could not open Google Maps";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +40,9 @@ class LoctionContact extends StatelessWidget {
             height: 19,
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              _openGoogleMaps();
+            },
             child: Text(
               textAlign: TextAlign.center,
               "Open Google Map",

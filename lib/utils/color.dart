@@ -21,4 +21,7 @@ class AppColors {
   static const Color forgetColor = Color(0xff7C8BA0);
   static const Color logocontainerColor = Color(0xff09A5DC);
   static const Color conatinerblurColor = Color(0xff0000001A);
+  static const Color abouttextColor = Color(0xff878787);
+  static const Color boldtextColor = Color(0xff2C3131);
+  static const Color successfulltextColor = Color(0xffA3A3A3);
 }

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:your_ears_app/pages/about/presentation/screen/about_screen.dart';
+import 'package:your_ears_app/pages/congratulations/presentation/screen/congratulations_screen.dart';
+import 'package:your_ears_app/pages/loaction/presentation/screen/loaction_screen.dart';
 import 'package:your_ears_app/utils/color.dart';
 import 'package:your_ears_app/utils/media_query.dart';
 
@@ -62,9 +65,7 @@ Widget drawer(BuildContext context) {
             color: AppColors.blueColor,
           ),
         ),
-        SizedBox(
-          width: 250,
-          child: Divider(color: Colors.grey.shade300)),
+        SizedBox(width: 250, child: Divider(color: Colors.grey.shade300)),
         ListTile(
           leading: SvgPicture.asset('assets/icons/bookings.svg'),
           title: Text('My bookings'),
