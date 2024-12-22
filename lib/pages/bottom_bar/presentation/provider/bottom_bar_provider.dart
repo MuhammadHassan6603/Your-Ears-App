@@ -21,4 +21,8 @@ class BottomBarProvider with ChangeNotifier {
     _selectedIndex = index;
     notifyListeners();
   }
+  void updateIndex(int index) {
+    _selectedIndex = index;
+    notifyListeners();
+  }
 }

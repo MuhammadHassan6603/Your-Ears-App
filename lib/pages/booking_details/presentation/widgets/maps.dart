@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class GoogleMapSection extends StatefulWidget {
-  const GoogleMapSection({super.key});
+class MapSection extends StatefulWidget {
+  const MapSection({super.key});
 
   @override
-  State<GoogleMapSection> createState() => _GoogleMapSectionState();
+  State<MapSection> createState() => _MapSectionState();
 }
 
-class _GoogleMapSectionState extends State<GoogleMapSection> {
+class _MapSectionState extends State<MapSection> {
   final Completer<GoogleMapController> _controllar = Completer();
   static final CameraPosition _kGooglePlex =
       CameraPosition(target: LatLng(30.201920, 71.453056), zoom: 14.4746);

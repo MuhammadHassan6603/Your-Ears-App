@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:your_ears_app/utils/color.dart';
 
-class CustomCalendar extends StatefulWidget {
-  const CustomCalendar({super.key});
+class BookingCalendar extends StatefulWidget {
+  const BookingCalendar({super.key});
 
   @override
-  State<CustomCalendar> createState() => _CustomCalendarState();
+  State<BookingCalendar> createState() => _BookingCalendarState();
 }
 
-class _CustomCalendarState extends State<CustomCalendar> {
+class _BookingCalendarState extends State<BookingCalendar> {
   List<DateTime?> _dates = [];
 
   @override
