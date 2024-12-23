@@ -40,7 +40,7 @@ class OtpField extends StatelessWidget {
         ),
         CustomButton(
             onTap: () {
-              context.router.push(ResetPasswordRoute());
+              context.router.replaceAll([ResetPasswordRoute()]);
             },
             text: "Reset Password"),
         SizedBox(
