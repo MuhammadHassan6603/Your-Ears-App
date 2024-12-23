@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:your_ears_app/pages/otp_screen/presentation/widget/otp_field.dart';
+import 'package:your_ears_app/utils/media_query.dart';
 import 'package:your_ears_app/widgets/signup_text.dart';
 
 @RoutePage()
@@ -15,7 +16,7 @@ class OtpScreen extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(
-            height: 70,
+            height: getHeight(context) * 0.15,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -23,7 +24,7 @@ class OtpScreen extends StatelessWidget {
                 'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum.'),
           ),
           SizedBox(
-            height: 137,
+            height: getHeight(context) * 0.17,
           ),
           Center(
             child: Padding(

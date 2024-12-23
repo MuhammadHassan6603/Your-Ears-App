@@ -72,6 +72,7 @@ Widget drawer(BuildContext context) {
             leading: SvgPicture.asset('assets/icons/bookings.svg'),
             title: Text('My bookings'),
             onTap: () {
+              Navigator.pop(context);
               context.router.push(BookingsScreenRoute());
             },
           ),

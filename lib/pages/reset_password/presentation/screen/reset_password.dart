@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:your_ears_app/pages/reset_password/presentation/widget/reset_field.dart';
 import 'package:your_ears_app/utils/color.dart';
+import 'package:your_ears_app/utils/media_query.dart';
 import 'package:your_ears_app/widgets/signup_text.dart';
 
 @RoutePage()
@@ -17,7 +18,7 @@ class ResetPassword extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(
-            height: 70,
+            height: getHeight(context) * 0.15,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -25,7 +26,7 @@ class ResetPassword extends StatelessWidget {
                 'It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum.'),
           ),
           SizedBox(
-            height: 92,
+            height: getHeight(context) * 0.17,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),

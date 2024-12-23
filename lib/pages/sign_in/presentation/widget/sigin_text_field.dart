@@ -2,8 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:your_ears_app/pages/contact_screen/presentation/screen/contact_screen.dart';
 import 'package:your_ears_app/pages/forget_screen/presentation/screen/forget_screen.dart';
+import 'package:your_ears_app/pages/sign_in/presentation/provider/sign_in_visibility.dart';
+import 'package:your_ears_app/pages/sign_up/presentation/provider/visibility_provider.dart';
 import 'package:your_ears_app/routes/routes_imports.gr.dart';
 import 'package:your_ears_app/utils/color.dart';
 import 'package:your_ears_app/utils/images.dart';
@@ -24,15 +27,27 @@ class SiginTextField extends StatelessWidget {
           SizedBox(
             height: 15,
           ),
-          CustomTextField(
-            isPass: true,
-            text: 'Password',
-            xicon: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SvgPicture.asset(AppImages.visibilityicon),
-              ],
-            ),
+          Consumer<SignInVisibilityProvider>(
+            builder: (context, passwordProvider, _) {
+              return CustomTextField(
+                isPass: passwordProvider.isObscured,
+                text: 'Password',
+                xicon: GestureDetector(
+                  onTap: passwordProvider.toggleVisibility,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(
+                        passwordProvider.isObscured
+                            ? AppImages.visibilityicon
+                            : AppImages
+                                .invisibilityicon, // Use appropriate icons
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
           ),
           SizedBox(
             height: 8,

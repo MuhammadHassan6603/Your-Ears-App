@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:your_ears_app/pages/sign_up/presentation/widget/google_container.dart';
 import 'package:your_ears_app/pages/sign_up/presentation/widget/signup_text_field.dart';
+import 'package:your_ears_app/utils/media_query.dart';
 import 'package:your_ears_app/widgets/signup_text.dart';
 
 @RoutePage()
@@ -16,7 +17,7 @@ class SignUp extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(
-            height: 70,
+            height: getHeight(context) * 0.15,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -28,7 +29,7 @@ class SignUp extends StatelessWidget {
           ),
           SignupTextField(),
           SizedBox(
-            height: 48,
+            height: 70,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 118.0),

@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:your_ears_app/pages/sign_up/presentation/provider/visibility_provider.dart';
 import 'package:your_ears_app/pages/sign_up/presentation/widget/check_row.dart';
 import 'package:your_ears_app/routes/routes_imports.gr.dart';
 import 'package:your_ears_app/utils/color.dart';
@@ -16,30 +18,49 @@ class SignupTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(spacing: 15, children: [
+      child: Column(children: [
         CustomTextField(text: 'Name'),
+        SizedBox(
+          height: 15,
+        ),
         CustomTextField(text: 'Email/Phone Number'),
-        CustomTextField(
-          isPass: true,
-          text: 'Password',
-          xicon: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(AppImages.visibilityicon),
-            ],
-          ),
-        ),
         SizedBox(
-          height: 8,
+          height: 15,
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 28),
-          child: CheckBoxRow(),
+        Consumer<PasswordVisibilityProvider>(
+          builder: (context, passwordProvider, _) {
+            return CustomTextField(
+              isPass: passwordProvider.isObscured,
+              text: 'Password',
+              xicon: GestureDetector(
+                onTap: passwordProvider.toggleVisibility,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(
+                      passwordProvider.isObscured
+                          ? AppImages.visibilityicon
+                          : AppImages.invisibilityicon, // Use appropriate icons
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
         ),
+        // SizedBox(
+        //   height: 8,
+        // ),
+        CheckBoxRow(),
         SizedBox(
-          height: 32,
+          height: 28,
         ),
-        CustomButton(text: "Create Account",onTap: (){context.router.replace(SignInRoute());},),
+        CustomButton(
+          text: "Create Account",
+          onTap: () {
+            context.router.replace(SignInRoute());
+          },
+        ),
         SizedBox(
           height: 28,
         ),

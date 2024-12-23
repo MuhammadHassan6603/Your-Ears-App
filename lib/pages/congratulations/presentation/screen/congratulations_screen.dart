@@ -8,6 +8,7 @@ import 'package:your_ears_app/routes/routes_imports.gr.dart';
 import 'package:your_ears_app/utils/color.dart';
 import 'package:your_ears_app/utils/images.dart';
 import 'package:your_ears_app/widgets/custom_button.dart';
+
 @RoutePage()
 class CongratulationsScreen extends StatelessWidget {
   const CongratulationsScreen({super.key});
@@ -46,9 +47,12 @@ class CongratulationsScreen extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
-        child: CustomButton(text: "Done",onTap: (){
-          context.router.replace(BottomBarRoute());
-        },),
+        child: CustomButton(
+          text: "Done",
+          onTap: () {
+            context.router.replaceAll([BottomBarRoute()]);
+          },
+        ),
       ),
     );
   }
