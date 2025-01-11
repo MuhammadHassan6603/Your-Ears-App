@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:your_ears_app/pages/bottom_bar/presentation/provider/bottom_bar_provider.dart';
 import 'package:your_ears_app/pages/home/presentation/provider/drawer_provider.dart';
+import 'package:your_ears_app/pages/profile/presentation/provider/logout_provider.dart';
 import 'package:your_ears_app/pages/sign_in/presentation/provider/login_provider.dart';
 import 'package:your_ears_app/pages/sign_in/presentation/provider/sign_in_visibility.dart';
 import 'package:your_ears_app/pages/sign_up/presentation/provider/check_box_provider.dart';
@@ -30,6 +31,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => DrawerProvider()),
         ChangeNotifierProvider(create: (_) => LoginProvider()),
         ChangeNotifierProvider(create: (_) => SignupProvider()),
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
       ],
       child: MaterialApp.router(
         routerConfig: _appRouter.config(),

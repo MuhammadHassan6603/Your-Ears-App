@@ -1,18 +1,15 @@
-import 'dart:developer';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart';
 import 'package:provider/provider.dart';
+import 'package:your_ears_app/pages/sign_up/presentation/provider/check_box_provider.dart';
 import 'package:your_ears_app/pages/sign_up/presentation/provider/signup_provider.dart';
 import 'package:your_ears_app/pages/sign_up/presentation/provider/visibility_provider.dart';
 import 'package:your_ears_app/pages/sign_up/presentation/widget/check_row.dart';
 import 'package:your_ears_app/routes/routes_imports.gr.dart';
 import 'package:your_ears_app/utils/color.dart';
 import 'package:your_ears_app/utils/images.dart';
-import 'package:your_ears_app/widgets/custom_button.dart';
 import 'package:your_ears_app/widgets/custom_text_field.dart';
 
 class SignupTextField extends StatefulWidget {
@@ -104,7 +101,7 @@ class _SignupTextFieldState extends State<SignupTextField> {
                     SvgPicture.asset(
                       passwordProvider1.isObscured1
                           ? AppImages.visibilityicon
-                          : AppImages.invisibilityicon, 
+                          : AppImages.invisibilityicon,
                     ),
                   ],
                 ),
@@ -116,22 +113,51 @@ class _SignupTextFieldState extends State<SignupTextField> {
         SizedBox(
           height: 28,
         ),
-        Consumer<SignupProvider>(
-            builder: (context, signupProvider, _) {
-              return CustomButton(
-                text: signupProvider.isLoading ? "Creating Account..." : "Create Account",
-                onTap: () {
-                  signupProvider.signup(
-                    _name.text.trim(),
-                    _email.text.trim(),
-                    _phone.text.trim(),
-                    _password.text.trim(),
-                    _passwordConfirmation.text.trim(),
-                  );
-                },
-              );
-            },
-          ),
+        Consumer2<SignupProvider, CheckBoxProvider>(
+          builder: (context, signupProvider, checkBoxProvider, _) {
+            return GestureDetector(
+              onTap: checkBoxProvider.isChecked
+                  ? () {
+                      signupProvider.signup(
+                        context,
+                        _name.text.trim(),
+                        _email.text.trim(),
+                        _phone.text.trim(),
+                        _password.text.trim(),
+                        _passwordConfirmation.text.trim(),
+                      );
+                    }
+                  : null,
+              child: Container(
+                height: 48,
+                decoration: BoxDecoration(
+                  color: checkBoxProvider.isChecked
+                  ?AppColors.h1Colors: Colors.grey,
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.blurColor,
+                      offset: const Offset(4, 4),
+                      blurRadius: 0.1,
+                    ),
+                  ],
+                  borderRadius: const BorderRadius.all(Radius.circular(14)),
+                ),
+                child: Center(
+                  child: Text(
+                    signupProvider.isLoading
+                        ? "Creating Account..."
+                        : "Create Account",
+                    style: GoogleFonts.inter(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.whiteColor,
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
         SizedBox(
           height: 28,
         ),

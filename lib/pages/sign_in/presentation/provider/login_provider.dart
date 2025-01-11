@@ -1,10 +1,11 @@
 import 'dart:developer';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+import 'package:velocity_x/velocity_x.dart';
+import 'package:your_ears_app/pages/profile/presentation/provider/logout_provider.dart';
 import 'dart:convert';
-
 import 'package:your_ears_app/routes/routes_imports.gr.dart';
 
 @RoutePage()
@@ -16,6 +17,7 @@ class LoginProvider with ChangeNotifier {
   String? get token => _token;
 
   Future<void> login(
+    BuildContext context,
     String email,
     String password,
   ) async {
@@ -31,20 +33,41 @@ class LoginProvider with ChangeNotifier {
           'Content-Type': 'application/json',
         },
         body: jsonEncode({
-          "email": email,
-          "password": password,
+          'email': email,
+          'password': password,
         }),
       );
       log("try k bad");
       if (response.statusCode == 200) {
-        // Successful login
-
         final data = jsonDecode(response.body);
+        Provider.of<AuthProvider>(context, listen: false)
+            .setToken(data['token']);
         _token = data['token'];
         log("Login successful, Token: $_token");
+        context.router.replace(BottomBarRoute());
       } else {
         final errorData = jsonDecode(response.body);
-        throw errorData['message'] ?? "Login failed. Please try again.";
+        String errorMessage =
+            errorData['message'] ?? "Login failed. Please try again.";
+        if (errorMessage == "Invalid credentials.") {
+          log("ERROR: Invalid credentials provided");
+          VxToast.show(
+            context,
+            msg: 'Invalid credentials. Please check your email and password.',
+            bgColor: Colors.red,
+            textColor: Colors.white,
+          );
+        } else {
+          log("ERROR: $errorMessage");
+          VxToast.show(
+            context,
+            msg: errorMessage,
+            bgColor: Colors.red,
+            textColor: Colors.white,
+          );
+        }
+
+        throw errorMessage;
       }
     } catch (error) {
       log("Error during login: $error");

@@ -3,11 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:your_ears_app/pages/contact_screen/presentation/screen/contact_screen.dart';
-import 'package:your_ears_app/pages/forget_screen/presentation/screen/forget_screen.dart';
 import 'package:your_ears_app/pages/sign_in/presentation/provider/login_provider.dart';
 import 'package:your_ears_app/pages/sign_in/presentation/provider/sign_in_visibility.dart';
-import 'package:your_ears_app/pages/sign_up/presentation/provider/visibility_provider.dart';
 import 'package:your_ears_app/routes/routes_imports.gr.dart';
 import 'package:your_ears_app/utils/color.dart';
 import 'package:your_ears_app/utils/images.dart';
@@ -31,11 +28,12 @@ class _SiginTextFieldState extends State<SiginTextField> {
     if (_formKey.currentState!.validate()) {
       try {
         await Provider.of<LoginProvider>(context, listen: false).login(
+          context,
           _emailController.text,
           _passwordController.text,
         );
         // Navigate to another screen on success
-        context.router.replace(BottomBarRoute());
+        
       } catch (error) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(error.toString())),
@@ -71,7 +69,7 @@ class _SiginTextFieldState extends State<SiginTextField> {
                         passwordProvider.isObscured
                             ? AppImages.visibilityicon
                             : AppImages
-                                .invisibilityicon, // Use appropriate icons
+                                .invisibilityicon,
                       ),
                     ],
                   ),
@@ -105,12 +103,10 @@ class _SiginTextFieldState extends State<SiginTextField> {
               : CustomButton(
                   onTap: () async {
                     Provider.of<LoginProvider>(context, listen: false).login(
+                      context,
                       _emailController.text,
                       _passwordController.text,
                     );
-                    // Navigate to another screen on success
-
-                    context.router.replace(BottomBarRoute());
                   },
                   text: 'LogIn'),
           SizedBox(

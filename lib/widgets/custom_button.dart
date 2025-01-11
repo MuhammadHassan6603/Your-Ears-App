@@ -6,7 +6,7 @@ import 'package:your_ears_app/utils/color.dart';
 class CustomButton extends StatelessWidget {
   final Function()? onTap;
   final String text;
-  final String? svgPicture; // Optional icon
+  final String? svgPicture;
 
   const CustomButton({
     super.key,

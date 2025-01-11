@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:your_ears_app/pages/profile/presentation/provider/logout_provider.dart';
 import 'package:your_ears_app/pages/profile/presentation/widget/profile_field.dart';
 import 'package:your_ears_app/utils/color.dart';
 import 'package:your_ears_app/utils/images.dart';
 import 'package:your_ears_app/widgets/custom_button.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,6 +33,21 @@ class ProfileScreen extends StatelessWidget {
             SvgPicture.asset(AppImages.backwordicon),
           ],
         ),
+        actions: [
+          Consumer<AuthProvider>(
+            builder: (context, authProvider, child) {
+              return GestureDetector(
+                onTap: () {
+                  authProvider.logout(context);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 15.0),
+                  child: Icon(Icons.logout),
+                ),
+              );
+            },
+          ),
+        ],
         title: Text(
           'Profile',
           style: GoogleFonts.inter(
