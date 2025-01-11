@@ -1,12 +1,12 @@
-class registerModel {
+class RegisterModel {
   String? message;
   User? user;
   Customer? customer;
   String? token;
 
-  registerModel({this.message, this.user, this.customer, this.token});
+  RegisterModel({this.message, this.user, this.customer, this.token});
 
-  registerModel.fromJson(Map<String, dynamic> json) {
+  RegisterModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
     customer = json['customer'] != null
