@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:your_ears_app/pages/profile/presentation/provider/logout_provider.dart';
 import 'package:your_ears_app/pages/profile/presentation/widget/profile_field.dart';
+import 'package:your_ears_app/routes/routes_imports.gr.dart';
 import 'package:your_ears_app/utils/color.dart';
 import 'package:your_ears_app/utils/images.dart';
 import 'package:your_ears_app/widgets/custom_button.dart';
@@ -39,6 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               return GestureDetector(
                 onTap: () {
                   authProvider.logout(context);
+                  context.router.replace(SignInRoute());
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(right: 15.0),
