@@ -58,14 +58,9 @@ class _ResetFieldState extends State<ResetField> {
           height: 16,
         ),
         CustomButton(
-          onTap:
-              isLoading ? null : handleSubmit, // Disable button while loading
-          text: isLoading
-              ? "Submitting..." // Button text changes during loading
-              : "Submit",
-          svgPicture: isLoading // Conditionally show progress indicator
-              ? AppImages.loader
-              : null,
+          onTap: isLoading ? null : handleSubmit,
+          text: isLoading ? "Submitting..." : "Submit",
+          svgPicture: isLoading ? AppImages.loader : null,
         ),
         if (isLoading)
           const SizedBox(

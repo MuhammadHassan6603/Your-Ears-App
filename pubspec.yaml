@@ -50,6 +50,8 @@ dependencies:
   url_launcher: ^6.3.1
   # Custom Calander 
   calendar_date_picker2: ^1.1.8
+  # http apis
+  http: ^1.2.2
 
 dev_dependencies:
   flutter_test:

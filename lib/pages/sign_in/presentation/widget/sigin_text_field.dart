@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:your_ears_app/pages/contact_screen/presentation/screen/contact_screen.dart';
 import 'package:your_ears_app/pages/forget_screen/presentation/screen/forget_screen.dart';
+import 'package:your_ears_app/pages/sign_in/presentation/provider/login_provider.dart';
 import 'package:your_ears_app/pages/sign_in/presentation/provider/sign_in_visibility.dart';
 import 'package:your_ears_app/pages/sign_up/presentation/provider/visibility_provider.dart';
 import 'package:your_ears_app/routes/routes_imports.gr.dart';
@@ -14,22 +15,51 @@ import 'package:your_ears_app/widgets/custom_button.dart';
 import 'package:your_ears_app/widgets/custom_text_field.dart';
 
 @RoutePage()
-class SiginTextField extends StatelessWidget {
+class SiginTextField extends StatefulWidget {
   const SiginTextField({super.key});
 
   @override
+  State<SiginTextField> createState() => _SiginTextFieldState();
+}
+
+class _SiginTextFieldState extends State<SiginTextField> {
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  void _login(BuildContext context) async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        await Provider.of<LoginProvider>(context, listen: false).login(
+          _emailController.text,
+          _passwordController.text,
+        );
+        // Navigate to another screen on success
+        context.router.replace(BottomBarRoute());
+      } catch (error) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(error.toString())),
+        );
+      }
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<LoginProvider>(context, listen: false);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         children: [
-          CustomTextField(text: 'Email/Phone Number'),
+          CustomTextField(
+              controller: _emailController, text: 'Email/Phone Number'),
           SizedBox(
             height: 15,
           ),
           Consumer<SignInVisibilityProvider>(
             builder: (context, passwordProvider, _) {
               return CustomTextField(
+                controller: _passwordController,
                 isPass: passwordProvider.isObscured,
                 text: 'Password',
                 xicon: GestureDetector(
@@ -70,11 +100,19 @@ class SiginTextField extends StatelessWidget {
           SizedBox(
             height: 32,
           ),
-          CustomButton(
-              onTap: () {
-                context.router.replace(BottomBarRoute());
-              },
-              text: 'LogIn'),
+          authProvider.isLoading
+              ? CircularProgressIndicator()
+              : CustomButton(
+                  onTap: () async {
+                    Provider.of<LoginProvider>(context, listen: false).login(
+                      _emailController.text,
+                      _passwordController.text,
+                    );
+                    // Navigate to another screen on success
+
+                    context.router.replace(BottomBarRoute());
+                  },
+                  text: 'LogIn'),
           SizedBox(
             height: 28,
           ),

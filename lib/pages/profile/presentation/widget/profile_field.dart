@@ -16,9 +16,13 @@ import 'package:your_ears_app/widgets/custom_button.dart';
 // }
 
 Widget profileField(
-  String lable,
+  String lable,{
+    TextEditingController? controller,
+  }
+  
 ) {
   return TextFormField(
+    controller: controller,
     obscureText: lable == "Change Password" || lable == "Confirm Password",
     cursorColor: AppColors.logocontainerColor,
     decoration: InputDecoration(
