@@ -14,7 +14,6 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,6 +40,9 @@ class _SignUpState extends State<SignUp> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 118.0),
               child: GoogleContainer(),
+            ),
+            SizedBox(
+              height: 50,
             ),
           ],
         ),

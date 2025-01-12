@@ -72,28 +72,28 @@ class BrowseIcons extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ClipOval(
-                      child:
-                          category.imageUrl != null && category.imageUrl!.isNotEmpty
-                              ? Image.network(
-                                  category.imageUrl!,
-                                  fit: BoxFit.cover,
-                                  width: 70,
-                                  height: 70,
-                                  errorBuilder: (context, error, stackTrace) {
-                                    return Image.asset(
-                                      imgPaths[index],
-                                      fit: BoxFit.cover,
-                                      width: 70,
-                                      height: 70,
-                                    );
-                                  },
-                                )
-                              : Image.asset(
+                      child: category.imageUrl != null &&
+                              category.imageUrl!.isNotEmpty
+                          ? Image.network(
+                              category.imageUrl!,
+                              fit: BoxFit.cover,
+                              width: 70,
+                              height: 70,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Image.asset(
                                   imgPaths[index],
                                   fit: BoxFit.cover,
                                   width: 70,
                                   height: 70,
-                                ),
+                                );
+                              },
+                            )
+                          : Image.asset(
+                              imgPaths[index],
+                              fit: BoxFit.cover,
+                              width: 70,
+                              height: 70,
+                            ),
                     ),
                     Text(
                       category.name ?? 'Unknown',

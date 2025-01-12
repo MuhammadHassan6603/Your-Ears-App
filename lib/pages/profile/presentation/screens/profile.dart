@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:your_ears_app/pages/profile/presentation/provider/calendar_provider.dart';
 import 'package:your_ears_app/pages/profile/presentation/provider/logout_provider.dart';
 import 'package:your_ears_app/pages/profile/presentation/widget/profile_field.dart';
 import 'package:your_ears_app/routes/routes_imports.gr.dart';
@@ -18,8 +21,12 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final TextEditingController _dobController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    // final DateProvider dateProvider =
+    //     Provider.of<DateProvider>(context, listen: false);
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
@@ -108,13 +115,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   children: [
-                    Row(
-                      spacing: 20,
-                      children: [
-                        Expanded(child: profileField('FirstName')),
-                        Expanded(child: profileField('LastName'))
-                      ],
-                    ),
+                    profileField('FirstName'),
                     SizedBox(
                       height: 20,
                     ),
@@ -146,13 +147,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             color: AppColors.successfulltextColor),
                       ),
                     ),
-                    Row(
-                      spacing: 20,
-                      children: [
-                        Expanded(child: profileField('Day')),
-                        Expanded(child: profileField('Month')),
-                        Expanded(child: profileField(' Year'))
-                      ],
+                    Consumer<DateProvider>(
+                      builder: (context, value, child) {
+                        return profileField('Date of Birth',
+                            isDateField: true,
+                            controller: _dobController, onTap: () async {
+                          await value.pickDate(context);
+
+                          _dobController.text =
+                              value.selectedDate.toString().split(' ').first;
+                        });
+                      },
                     ),
                     SizedBox(
                       height: 20,

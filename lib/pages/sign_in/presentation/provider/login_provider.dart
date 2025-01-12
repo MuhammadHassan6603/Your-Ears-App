@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:your_ears_app/helper/share_prefences.dart';
 import 'package:your_ears_app/pages/profile/presentation/provider/logout_provider.dart';
 import 'dart:convert';
 import 'package:your_ears_app/routes/routes_imports.gr.dart';
@@ -43,14 +44,15 @@ class LoginProvider with ChangeNotifier {
         Provider.of<AuthProvider>(context, listen: false)
             .setToken(data['token']);
         _token = data['token'];
-        // notifyListeners();
+        final sharedPref = SharedPrefHelper();
+        await sharedPref.setString(_token ?? "");
         log("Login successful, Token: $_token");
         VxToast.show(
-            context,
-            msg: 'Login Successful',
-            bgColor: Colors.green,
-            textColor: Colors.white,
-          );
+          context,
+          msg: 'Login Successful',
+          bgColor: Colors.green,
+          textColor: Colors.white,
+        );
         context.router.replace(BottomBarRoute());
       } else {
         final errorData = jsonDecode(response.body);

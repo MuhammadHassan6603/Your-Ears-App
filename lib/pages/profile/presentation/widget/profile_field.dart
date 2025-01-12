@@ -15,29 +15,30 @@ import 'package:your_ears_app/widgets/custom_button.dart';
 //   }
 // }
 
-Widget profileField(
-  String lable,{
-    TextEditingController? controller,
-  }
-  
-) {
-  return TextFormField(
-    controller: controller,
-    obscureText: lable == "Change Password" || lable == "Confirm Password",
-    cursorColor: AppColors.logocontainerColor,
-    decoration: InputDecoration(
-        focusColor: Color(0xffCDCDCD),
-        focusedBorder: UnderlineInputBorder(),
-        enabledBorder: UnderlineInputBorder(),
-        labelText: lable,
-        labelStyle: TextStyle(color: AppColors.successfulltextColor),
-        suffixIcon: lable == 'City'
-            ? Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(AppImages.downarrowicon),
-                ],
-              )
-            : null),
+Widget profileField(String label,
+    {TextEditingController? controller,
+    bool isDateField = false,
+    VoidCallback? onTap,
+    VoidCallback? pickDate}) {
+  return GestureDetector(
+    onTap: isDateField ? onTap : null,
+    child: TextFormField(
+      controller: controller,
+      readOnly: isDateField,
+      obscureText: label == "Change Password" || label == "Confirm Password",
+      cursorColor: AppColors.logocontainerColor,
+      decoration: InputDecoration(
+        focusColor: const Color(0xffCDCDCD),
+        focusedBorder: const UnderlineInputBorder(),
+        enabledBorder: const UnderlineInputBorder(),
+        labelText: label,
+        labelStyle: const TextStyle(color: AppColors.successfulltextColor),
+        suffixIcon: isDateField
+            ? InkWell(
+                onTap: pickDate,
+                child: const Icon(Icons.calendar_today, color: Colors.grey))
+            : null,
+      ),
+    ),
   );
 }

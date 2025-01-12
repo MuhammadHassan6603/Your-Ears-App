@@ -52,7 +52,10 @@ dependencies:
   calendar_date_picker2: ^1.1.8
   # http apis
   http: ^1.2.2
+  # tost message
   velocity_x: ^4.2.1
+   # local storage
+  shared_preferences: ^2.3.5
 
 dev_dependencies:
   flutter_test:
