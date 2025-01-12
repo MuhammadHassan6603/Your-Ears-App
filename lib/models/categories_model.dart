@@ -10,6 +10,7 @@ class CategoriesModel {
   String? status;
   String? createdAt;
   String? updatedAt;
+  String? imageUrl;
 
   CategoriesModel(
       {this.id,
@@ -22,7 +23,8 @@ class CategoriesModel {
       this.image,
       this.status,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt,
+      this.imageUrl});
 
   CategoriesModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -36,6 +38,7 @@ class CategoriesModel {
     status = json['status'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    imageUrl = json['image_url'];
   }
 
   Map<String, dynamic> toJson() {
@@ -51,6 +54,7 @@ class CategoriesModel {
     data['status'] = this.status;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+    data['image_url'] = this.imageUrl;
     return data;
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:your_ears_app/models/categories_model.dart';
-import 'package:your_ears_app/pages/home/data/api_service.dart';
+import 'package:your_ears_app/pages/home/data/category_api.dart';
 import 'package:your_ears_app/pages/sign_in/presentation/provider/login_provider.dart';
 import 'package:your_ears_app/pages/sign_up/presentation/provider/signup_provider.dart';
 import 'package:your_ears_app/utils/color.dart';
@@ -27,7 +27,7 @@ class BrowseIcons extends StatelessWidget {
       return [];
     }
 
-    final apiService = ApiService();
+    final apiService = BrowseApiService();
     try {
       final categories = await apiService.fetchCategories(token);
       return categories;
@@ -73,9 +73,9 @@ class BrowseIcons extends StatelessWidget {
                   children: [
                     ClipOval(
                       child:
-                          category.image != null && category.image!.isNotEmpty
+                          category.imageUrl != null && category.imageUrl!.isNotEmpty
                               ? Image.network(
-                                  category.image!,
+                                  category.imageUrl!,
                                   fit: BoxFit.cover,
                                   width: 70,
                                   height: 70,

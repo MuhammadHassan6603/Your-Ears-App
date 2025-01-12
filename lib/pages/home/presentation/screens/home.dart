@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:your_ears_app/models/categories_model.dart';
-import 'package:your_ears_app/pages/home/data/api_service.dart';
+import 'package:your_ears_app/pages/home/data/category_api.dart';
 import 'package:your_ears_app/pages/home/presentation/widgets/browse_items.dart';
 import 'package:your_ears_app/pages/home/presentation/widgets/drawer.dart';
 import 'package:your_ears_app/pages/home/presentation/widgets/grid_items.dart';
@@ -185,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(
                 height: 15,
               ),
-              gridItems(context)
+              GridItems()
             ],
           ),
         ));

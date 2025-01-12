@@ -15,7 +15,7 @@ Widget gridWidget(BuildContext context, String imgPath, String text) {
             decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         image: DecorationImage(
-          image: AssetImage(imgPath),
+          image: NetworkImage(imgPath),
           fit: BoxFit.cover,
         ),
             ),
