@@ -45,7 +45,10 @@ class LoginProvider with ChangeNotifier {
             .setToken(data['token']);
         _token = data['token'];
         final sharedPref = SharedPrefHelper();
+        log("$_token ");
         await sharedPref.setString(_token ?? "");
+        String? id = await sharedPref.getString();
+        log(" share pre id $id");
         log("Login successful, Token: $_token");
         VxToast.show(
           context,

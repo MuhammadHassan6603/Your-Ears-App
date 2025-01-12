@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:your_ears_app/helper/share_prefences.dart';
 import 'package:your_ears_app/models/categories_model.dart';
 import 'package:your_ears_app/pages/home/data/category_api.dart';
 import 'package:your_ears_app/pages/sign_in/presentation/provider/login_provider.dart';
@@ -16,8 +17,9 @@ class BrowseIcons extends StatelessWidget {
     final signupProvider = Provider.of<SignupProvider>(context, listen: false);
     final loginToken = loginProvider.token;
     final signupToken = signupProvider.token;
-
+    SharedPrefHelper sharepref = SharedPrefHelper();
     String? token;
+    token = await sharepref.getString();
     if (loginToken != null && loginToken.isNotEmpty) {
       token = loginToken;
     } else if (signupToken != null && signupToken.isNotEmpty) {

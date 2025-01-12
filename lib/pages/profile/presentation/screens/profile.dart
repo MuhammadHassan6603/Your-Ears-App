@@ -151,12 +151,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       builder: (context, value, child) {
                         return profileField('Date of Birth',
                             isDateField: true,
-                            controller: _dobController, onTap: () async {
+                            controller: _dobController, pickDate: () async {
                           await value.pickDate(context);
-
-                          _dobController.text =
-                              value.selectedDate.toString().split(' ').first;
-                        });
+                          if (value.selectedDate != null) {
+                            _dobController.text =
+                                value.selectedDate.toString().split(' ').first;
+                          }
+                        }, onTap: () async {});
                       },
                     ),
                     SizedBox(
