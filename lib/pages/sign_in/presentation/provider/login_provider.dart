@@ -43,7 +43,14 @@ class LoginProvider with ChangeNotifier {
         Provider.of<AuthProvider>(context, listen: false)
             .setToken(data['token']);
         _token = data['token'];
+        // notifyListeners();
         log("Login successful, Token: $_token");
+        VxToast.show(
+            context,
+            msg: 'Login Successful',
+            bgColor: Colors.green,
+            textColor: Colors.white,
+          );
         context.router.replace(BottomBarRoute());
       } else {
         final errorData = jsonDecode(response.body);

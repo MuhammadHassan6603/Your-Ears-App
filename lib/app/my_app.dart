@@ -24,13 +24,13 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => SignupProvider()),
         ChangeNotifierProvider(create: (_) => BottomBarProvider()),
         ChangeNotifierProvider(create: (_) => PasswordVisibilityProvider()),
         ChangeNotifierProvider(create: (_) => CheckBoxProvider()),
         ChangeNotifierProvider(create: (_) => SignInVisibilityProvider()),
         ChangeNotifierProvider(create: (_) => DrawerProvider()),
         ChangeNotifierProvider(create: (_) => LoginProvider()),
-        ChangeNotifierProvider(create: (_) => SignupProvider()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
       ],
       child: MaterialApp.router(

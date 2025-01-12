@@ -1,13 +1,26 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:your_ears_app/models/categories_model.dart';
+import 'package:your_ears_app/pages/home/data/api_service.dart';
 import 'package:your_ears_app/pages/home/presentation/widgets/browse_items.dart';
 import 'package:your_ears_app/pages/home/presentation/widgets/drawer.dart';
 import 'package:your_ears_app/pages/home/presentation/widgets/grid_items.dart';
+import 'package:your_ears_app/pages/sign_in/presentation/provider/login_provider.dart';
 import 'package:your_ears_app/utils/color.dart';
 import 'package:your_ears_app/utils/media_query.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  
 
   @override
   Widget build(BuildContext context) {
@@ -155,7 +168,7 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 height: 5,
               ),
-              SizedBox(height: 120, child: getBrowseIcons(context)),
+              SizedBox(height: 120, child: BrowseIcons()),
               SizedBox(
                 height: 8,
               ),
