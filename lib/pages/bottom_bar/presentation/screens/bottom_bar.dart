@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -21,16 +20,13 @@ class _BottomBarState extends State<BottomBar> {
   @override
   void initState() {
     getId();
-
     super.initState();
   }
-
   getId() async {
     final sharedPref = SharedPrefHelper();
     String? id = await sharedPref.getString();
     log(" share pre id $id");
   }
-
   @override
   Widget build(BuildContext context) {
     final bottomBarProvider = Provider.of<BottomBarProvider>(context);

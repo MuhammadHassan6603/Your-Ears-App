@@ -15,22 +15,37 @@ class BrowseIcons extends StatelessWidget {
   Future<List<CategoriesModel>> fetchCategories(BuildContext context) async {
     final loginProvider = Provider.of<LoginProvider>(context, listen: false);
     final signupProvider = Provider.of<SignupProvider>(context, listen: false);
-    final loginToken = loginProvider.token;
-    final signupToken = signupProvider.token;
     SharedPrefHelper sharepref = SharedPrefHelper();
     String? token;
+
+    // Retrieve saved token from SharedPreferences
     token = await sharepref.getString();
-    if (loginToken != null && loginToken.isNotEmpty) {
-      token = loginToken;
-    } else if (signupToken != null && signupToken.isNotEmpty) {
-      token = signupToken;
-    } else {
+
+    // Check if loginProvider or signupProvider has a token
+    if (loginProvider.token != null && loginProvider.token!.isNotEmpty) {
+      log('');
+      token = loginProvider.token;
+      log(' login token $loginProvider.token');
+      // Save the token in SharedPreferences
+      await sharepref.setString(token!);
+    } else if (signupProvider.token != null &&
+        signupProvider.token!.isNotEmpty) {
+      token = signupProvider.token;
+      log(' signup  token $signupProvider.token');
+      // Save the token in SharedPreferences
+      await sharepref.setString(token!);
+    }
+
+    // If no token is found, log an error and return an empty list
+    if (token == null || token.isEmpty) {
       log('Error: No valid token found. Cannot fetch categories.');
       return [];
     }
 
     final apiService = BrowseApiService();
+
     try {
+      // Fetch categories using the valid token
       final categories = await apiService.fetchCategories(token);
       return categories;
     } catch (e) {

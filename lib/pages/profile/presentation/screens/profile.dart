@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:nativewrappers/_internal/vm/lib/internal_patch.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,13 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final TextEditingController _dobController = TextEditingController();
+  final TextEditingController fullname = TextEditingController();
+  final TextEditingController email = TextEditingController();
+  final TextEditingController phoneNumber = TextEditingController();
+  final TextEditingController city = TextEditingController();
+  final TextEditingController postalcode = TextEditingController();
+  final TextEditingController changepassword = TextEditingController();
+  final TextEditingController Confirmpassword = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -115,23 +123,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   children: [
-                    profileField('FirstName'),
+                    profileField(controller: fullname, 'Full Name'),
                     SizedBox(
                       height: 20,
                     ),
-                    profileField('YourEmail'),
+                    profileField(controller: email, 'Your Email'),
                     SizedBox(
                       height: 20,
                     ),
-                    profileField('Phone Number'),
+                    profileField(controller: phoneNumber, 'Phone Number'),
                     SizedBox(
                       height: 20,
                     ),
                     Row(
                       spacing: 20,
                       children: [
-                        Expanded(child: profileField('City')),
-                        Expanded(child: profileField('Postal Code'))
+                        Expanded(child: profileField(controller: city, 'City')),
+                        Expanded(
+                            child: profileField(
+                                controller: postalcode, 'Postal Code'))
                       ],
                     ),
                     SizedBox(
@@ -163,11 +173,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     SizedBox(
                       height: 20,
                     ),
-                    profileField('Change Password'),
+                    profileField(controller: changepassword, 'Change Password'),
                     SizedBox(
                       height: 20,
                     ),
-                    profileField('Confirm Password'),
+                    profileField(
+                        controller: Confirmpassword, 'Confirm Password'),
                     SizedBox(
                       height: 60,
                     ),
