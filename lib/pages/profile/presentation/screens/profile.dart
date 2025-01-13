@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:nativewrappers/_internal/vm/lib/internal_patch.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
