@@ -8,6 +8,7 @@ import 'package:your_ears_app/pages/home/data/category_api.dart';
 import 'package:your_ears_app/pages/home/presentation/widgets/browse_items.dart';
 import 'package:your_ears_app/pages/home/presentation/widgets/drawer.dart';
 import 'package:your_ears_app/pages/home/presentation/widgets/grid_items.dart';
+import 'package:your_ears_app/pages/profile/presentation/provider/logout_provider.dart';
 import 'package:your_ears_app/pages/sign_in/presentation/provider/login_provider.dart';
 import 'package:your_ears_app/utils/color.dart';
 import 'package:your_ears_app/utils/media_query.dart';
@@ -20,7 +21,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  
+  @override
+  void initState() {
+    final AuthPro = Provider.of<AuthProvider>(context, listen: false).geToken();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

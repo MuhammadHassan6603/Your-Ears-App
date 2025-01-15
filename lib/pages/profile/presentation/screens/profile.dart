@@ -55,7 +55,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               return GestureDetector(
                 onTap: () {
                   authProvider.logout(context);
-                  context.router.replace(SignInRoute());
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(right: 15.0),

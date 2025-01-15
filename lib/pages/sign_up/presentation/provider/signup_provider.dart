@@ -36,12 +36,14 @@ class SignupProvider with ChangeNotifier {
         },
       );
       if (response.statusCode == 200) {
+        final sharedPref = SharedPrefHelper();
         final data = json.decode(response.body);
         final registerModel = RegisterModel.fromJson(data);
         Provider.of<AuthProvider>(context, listen: false)
             .setToken(data['token']);
         _token = data['token'];
-        final sharedPref = SharedPrefHelper();
+        //set user model in share pref
+        await sharedPref.setUserModel(registerModel);
         await sharedPref.setString(_token ?? "");
         log('SIGNUP SUCCESSFUL: ${registerModel.message},$_token');
         VxToast.show(context,
