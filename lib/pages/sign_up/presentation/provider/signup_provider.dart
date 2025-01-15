@@ -15,7 +15,7 @@ class SignupProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   String? _token;
   String? get token => _token;
-  
+
 
   void setLoading(bool value) {
     _isLoading = value;
@@ -34,6 +34,7 @@ class SignupProvider with ChangeNotifier {
           'phone': phone,
           'password': password,
           'password_confirmation': passwordConfirmation,
+          
         },
       );
       if (response.statusCode == 200) {

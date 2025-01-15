@@ -2,73 +2,89 @@ class RegisterModel {
   String? message;
   User? user;
   Customer? customer;
+  String? userProfilePic;
   String? token;
 
-  RegisterModel({this.message, this.user, this.customer, this.token});
+  RegisterModel(
+      {this.message,
+      this.user,
+      this.customer,
+      this.userProfilePic,
+      this.token});
 
   RegisterModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
-    user = json['user'] != null ? User.fromJson(json['user']) : null;
+    user = json['user'] != null ? new User.fromJson(json['user']) : null;
     customer = json['customer'] != null
-        ? Customer.fromJson(json['customer'])
+        ? new Customer.fromJson(json['customer'])
         : null;
+    userProfilePic = json['user_profile_pic'];
     token = json['token'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['message'] = message;
-    if (user != null) {
-      data['user'] = user!.toJson();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['message'] = this.message;
+    if (this.user != null) {
+      data['user'] = this.user!.toJson();
     }
-    if (customer != null) {
-      data['customer'] = customer!.toJson();
+    if (this.customer != null) {
+      data['customer'] = this.customer!.toJson();
     }
-    data['token'] = token;
+    data['user_profile_pic'] = this.userProfilePic;
+    data['token'] = this.token;
     return data;
   }
 }
 
 class User {
+  int? id;
   String? name;
   String? email;
   String? phone;
-  String? updatedAt;
+  String? roleAs;
+  String? emailVerifiedAt;
   String? createdAt;
-  int? id;
+  String? updatedAt;
   Customer? customer;
 
   User(
-      {this.name,
+      {this.id,
+      this.name,
       this.email,
       this.phone,
-      this.updatedAt,
+      this.roleAs,
+      this.emailVerifiedAt,
       this.createdAt,
-      this.id,
+      this.updatedAt,
       this.customer});
 
   User.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     name = json['name'];
     email = json['email'];
     phone = json['phone'];
-    updatedAt = json['updated_at'];
+    roleAs = json['role_as'];
+    emailVerifiedAt = json['email_verified_at'];
     createdAt = json['created_at'];
-    id = json['id'];
+    updatedAt = json['updated_at'];
     customer = json['customer'] != null
-        ? Customer.fromJson(json['customer'])
+        ? new Customer.fromJson(json['customer'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['name'] = name;
-    data['email'] = email;
-    data['phone'] = phone;
-    data['updated_at'] = updatedAt;
-    data['created_at'] = createdAt;
-    data['id'] = id;
-    if (customer != null) {
-      data['customer'] = customer!.toJson();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['email'] = this.email;
+    data['phone'] = this.phone;
+    data['role_as'] = this.roleAs;
+    data['email_verified_at'] = this.emailVerifiedAt;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    if (this.customer != null) {
+      data['customer'] = this.customer!.toJson();
     }
     return data;
   }
@@ -106,15 +122,15 @@ class Customer {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['user_id'] = userId;
-    data['profile_pic'] = profilePic;
-    data['city'] = city;
-    data['postal_code'] = postalCode;
-    data['date_of_birth'] = dateOfBirth;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['user_id'] = this.userId;
+    data['profile_pic'] = this.profilePic;
+    data['city'] = this.city;
+    data['postal_code'] = this.postalCode;
+    data['date_of_birth'] = this.dateOfBirth;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
     return data;
   }
 }

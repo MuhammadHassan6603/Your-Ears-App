@@ -6,11 +6,13 @@ import 'package:provider/provider.dart';
 import 'package:your_ears_app/models/register_model.dart';
 import 'package:your_ears_app/pages/bottom_bar/presentation/provider/bottom_bar_provider.dart';
 import 'package:your_ears_app/pages/home/presentation/provider/drawer_provider.dart';
+import 'package:your_ears_app/pages/sign_in/presentation/provider/login_provider.dart';
 import 'package:your_ears_app/routes/routes_imports.gr.dart';
 import 'package:your_ears_app/utils/color.dart';
 import 'package:your_ears_app/utils/media_query.dart';
 
 Widget drawer(BuildContext context) {
+  var userProvider=Provider.of<LoginProvider>(context,listen: false);
   return Drawer(
     backgroundColor: AppColors.whiteColor,
     child: SingleChildScrollView(
@@ -42,8 +44,8 @@ Widget drawer(BuildContext context) {
                   border: Border.all(color: Colors.blue),
                 ),
                 child: ClipOval(
-                  child: Image.asset(
-                    'assets/images/profile1.jpg',
+                  child: Image.network(
+                    userProvider.userModel!.userProfilePic.toString(),
                     width: 90,
                     height: 90,
                     fit: BoxFit.cover,
@@ -54,7 +56,7 @@ Widget drawer(BuildContext context) {
           ),
           SizedBox(height: 10),
           Text(
-            'clods',
+            userProvider.userModel!.user!.name.toString(),
             style: GoogleFonts.inter(
               fontSize: 20,
               fontWeight: FontWeight.w500,

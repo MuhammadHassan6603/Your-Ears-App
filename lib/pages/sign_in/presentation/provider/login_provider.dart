@@ -41,7 +41,7 @@ class LoginProvider with ChangeNotifier {
           'password': password,
         }),
       );
-      
+
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         Provider.of<AuthProvider>(context, listen: false)
@@ -52,9 +52,7 @@ class LoginProvider with ChangeNotifier {
         _token = data['token'];
         final sharedPref = SharedPrefHelper();
         sharedPref.setUserModel(userData);
-        log("  $_token ");
-//set user model in share pref
-        // await sharedPref.setUserModel(registerModel);
+        log("$_token ");
         await sharedPref.setString(_token ?? "");
         String? id = await sharedPref.getString();
         log(" share pre id $id");
