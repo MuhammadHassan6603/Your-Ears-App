@@ -5,17 +5,20 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:your_ears_app/helper/share_prefences.dart';
+import 'package:your_ears_app/models/register_model.dart';
 import 'package:your_ears_app/pages/profile/presentation/provider/logout_provider.dart';
 import 'dart:convert';
 import 'package:your_ears_app/routes/routes_imports.gr.dart';
 
-@RoutePage()
+// @RoutePage()
 class LoginProvider with ChangeNotifier {
   bool _isLoading = false;
   String? _token;
+  RegisterModel? userModel;
 
   bool get isLoading => _isLoading;
   String? get token => _token;
+  
 
   Future<void> login(
     BuildContext context,
@@ -38,14 +41,17 @@ class LoginProvider with ChangeNotifier {
           'password': password,
         }),
       );
-      log("try k bad");
+      
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         Provider.of<AuthProvider>(context, listen: false)
             .setToken(data['token']);
+        RegisterModel userData = RegisterModel.fromJson(data);
+        log("user data ${userData.user}");
+        userModel = userData;
         _token = data['token'];
         final sharedPref = SharedPrefHelper();
-
+        sharedPref.setUserModel(userData);
         log("  $_token ");
 //set user model in share pref
         // await sharedPref.setUserModel(registerModel);
@@ -81,7 +87,6 @@ class LoginProvider with ChangeNotifier {
             textColor: Colors.white,
           );
         }
-
         throw errorMessage;
       }
     } catch (error) {
@@ -91,5 +96,14 @@ class LoginProvider with ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     }
+  }
+
+
+  //get user data 
+  getUserData() async {
+    final sharedPref = SharedPrefHelper();
+     var data = await sharedPref.getUserModel();
+     userModel = data;
+     notifyListeners();
   }
 }

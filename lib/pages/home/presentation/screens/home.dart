@@ -1,15 +1,12 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:your_ears_app/models/categories_model.dart';
-import 'package:your_ears_app/pages/home/data/category_api.dart';
+import 'package:your_ears_app/helper/share_prefences.dart';
+import 'package:your_ears_app/models/register_model.dart';
 import 'package:your_ears_app/pages/home/presentation/widgets/browse_items.dart';
 import 'package:your_ears_app/pages/home/presentation/widgets/drawer.dart';
 import 'package:your_ears_app/pages/home/presentation/widgets/grid_items.dart';
 import 'package:your_ears_app/pages/profile/presentation/provider/logout_provider.dart';
-import 'package:your_ears_app/pages/sign_in/presentation/provider/login_provider.dart';
 import 'package:your_ears_app/utils/color.dart';
 import 'package:your_ears_app/utils/media_query.dart';
 
@@ -21,10 +18,22 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late Future<RegisterModel?> _userFuture;
   @override
   void initState() {
     final AuthPro = Provider.of<AuthProvider>(context, listen: false).geToken();
+    _userFuture = _fetchUserData();
     super.initState();
+  }
+
+  Future<RegisterModel?> _fetchUserData() async {
+    SharedPrefHelper sharedPrefHelper = SharedPrefHelper();
+    try {
+      return await sharedPrefHelper.getUserModel();
+    } catch (e) {
+      print("Error fetching user model: $e");
+      return null;
+    }
   }
 
   @override
@@ -75,6 +84,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         drawer: drawer(context),
+      //   drawer: FutureBuilder<RegisterModel?>(
+      //   future: _userFuture,
+      //   builder: (context, snapshot) {
+      //     return drawer(context, snapshot.data);
+      //   },
+      // ),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

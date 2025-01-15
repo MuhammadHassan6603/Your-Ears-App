@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:your_ears_app/helper/share_prefences.dart';
+import 'package:your_ears_app/pages/sign_in/presentation/provider/login_provider.dart';
 import 'dart:async';
 
 import 'package:your_ears_app/routes/routes_imports.gr.dart';
@@ -20,7 +22,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-
     // Show logo animation after 1 second
     Timer(const Duration(seconds: 1), () {
       setState(() {
@@ -37,7 +38,10 @@ class _SplashScreenState extends State<SplashScreen> {
     final sharedPref = SharedPrefHelper();
     final userId = await sharedPref.getString();
 
+    var loginProvider =  Provider.of<LoginProvider>(context,listen: false);
+    loginProvider.getUserData();
     if (userId != null && userId.isNotEmpty) {
+      
       context.router.replace(BottomBarRoute());
     } else {
       context.router.replace(OnBoardingRoute());
