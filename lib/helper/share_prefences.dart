@@ -37,6 +37,12 @@ class SharedPrefHelper {
     return model;
   }
 
+  //user model remove
+  Future<void> removeUserModel() async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    await _prefs.remove("user_key");
+  }
+
   /// Retrieve a string value from SharedPreferences
   Future<String?> getString() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

@@ -18,7 +18,6 @@ class LoginProvider with ChangeNotifier {
 
   bool get isLoading => _isLoading;
   String? get token => _token;
-  
 
   Future<void> login(
     BuildContext context,
@@ -96,12 +95,55 @@ class LoginProvider with ChangeNotifier {
     }
   }
 
-
-  //get user data 
+  //get user data
   getUserData() async {
     final sharedPref = SharedPrefHelper();
-     var data = await sharedPref.getUserModel();
-     userModel = data;
-     notifyListeners();
+    var data = await sharedPref.getUserModel();
+    userModel = data;
+    notifyListeners();
+  }
+
+//   delete account function
+
+  Future<void> deleteAccount(
+    BuildContext context,
+  ) async {
+    log('delete acc api');
+    final url = Uri.parse('https://portal.yourears.co.uk/api/profile/delete');
+
+    try {
+      final response = await http.delete(
+        url,
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          'password': _token,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        final sharedPref = SharedPrefHelper();
+        sharedPref.remove;
+        log('Account deleted successfully');
+        VxToast.show(context,
+            msg: 'Account deleted successfully',
+            bgColor: Colors.green,
+            textColor: Colors.white);
+      } else {
+        log('Failed to delete account: ${response.body}');
+        VxToast.show(context,
+            msg: 'Failed to delete account: ${response.body}',
+            bgColor: Colors.red,
+            textColor: Colors.white);
+      }
+    } catch (e) {
+      log('An error occurred: $e');
+      VxToast.show(context,
+          msg: 'An error occurred: $e',
+          bgColor: Colors.red,
+          textColor: Colors.white);
+    }
   }
 }

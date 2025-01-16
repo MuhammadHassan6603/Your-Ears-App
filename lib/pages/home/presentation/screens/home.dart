@@ -7,6 +7,7 @@ import 'package:your_ears_app/pages/home/presentation/widgets/browse_items.dart'
 import 'package:your_ears_app/pages/home/presentation/widgets/drawer.dart';
 import 'package:your_ears_app/pages/home/presentation/widgets/grid_items.dart';
 import 'package:your_ears_app/pages/profile/presentation/provider/logout_provider.dart';
+import 'package:your_ears_app/pages/sign_in/presentation/provider/login_provider.dart';
 import 'package:your_ears_app/utils/color.dart';
 import 'package:your_ears_app/utils/media_query.dart';
 
@@ -38,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var userProvider = Provider.of<LoginProvider>(context, listen: false);
     return Scaffold(
         backgroundColor: AppColors.whiteColor,
         appBar: AppBar(
@@ -73,23 +75,25 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: ClipOval(
-                child: Image.asset(
-                  'assets/images/profile1.jpg',
-                  width: 40,
-                  height: 40,
-                  fit: BoxFit.cover,
-                ),
+                child: userProvider.userModel?.userProfilePic?.isEmpty == true
+                    ? Image.network(
+                        userProvider.userModel!.userProfilePic.toString(),
+                        width: 40,
+                        height: 40,
+                        fit: BoxFit.cover,
+                      )
+                    : Image.asset('assets/images/profile.png'),
               ),
             ),
           ],
         ),
         drawer: drawer(context),
-      //   drawer: FutureBuilder<RegisterModel?>(
-      //   future: _userFuture,
-      //   builder: (context, snapshot) {
-      //     return drawer(context, snapshot.data);
-      //   },
-      // ),
+        //   drawer: FutureBuilder<RegisterModel?>(
+        //   future: _userFuture,
+        //   builder: (context, snapshot) {
+        //     return drawer(context, snapshot.data);
+        //   },
+        // ),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

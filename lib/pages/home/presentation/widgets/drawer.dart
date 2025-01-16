@@ -12,7 +12,7 @@ import 'package:your_ears_app/utils/color.dart';
 import 'package:your_ears_app/utils/media_query.dart';
 
 Widget drawer(BuildContext context) {
-  var userProvider=Provider.of<LoginProvider>(context,listen: false);
+  var userProvider = Provider.of<LoginProvider>(context, listen: false);
   return Drawer(
     backgroundColor: AppColors.whiteColor,
     child: SingleChildScrollView(
@@ -44,12 +44,14 @@ Widget drawer(BuildContext context) {
                   border: Border.all(color: Colors.blue),
                 ),
                 child: ClipOval(
-                  child: Image.network(
-                    userProvider.userModel!.userProfilePic.toString(),
-                    width: 90,
-                    height: 90,
-                    fit: BoxFit.cover,
-                  ),
+                  child: userProvider.userModel?.userProfilePic?.isEmpty == true
+                      ? Image.network(
+                          userProvider.userModel!.userProfilePic.toString(),
+                          width: 90,
+                          height: 90,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.asset('assets/images/profile.png'),
                 ),
               ),
             ),
