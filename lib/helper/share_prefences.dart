@@ -20,6 +20,12 @@ class SharedPrefHelper {
     await _prefs.setString('userId', value);
   }
 
+  /// Remove a specific key from SharedPreferences
+  Future<void> removeString() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('userId');
+  }
+
   //user model set
   Future<void> setUserModel(RegisterModel model) async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
@@ -47,12 +53,6 @@ class SharedPrefHelper {
   Future<String?> getString() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('userId');
-  }
-
-  /// Remove a specific key from SharedPreferences
-  Future<void> remove(String key) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove(key);
   }
 
   /// Clear all SharedPreferences

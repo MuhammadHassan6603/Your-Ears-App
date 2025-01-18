@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:your_ears_app/models/register_model.dart';
 import 'package:your_ears_app/pages/bottom_bar/presentation/provider/bottom_bar_provider.dart';
 import 'package:your_ears_app/pages/home/presentation/provider/drawer_provider.dart';
 import 'package:your_ears_app/pages/sign_in/presentation/provider/login_provider.dart';
@@ -43,15 +42,25 @@ Widget drawer(BuildContext context) {
                   shape: BoxShape.circle,
                   border: Border.all(color: Colors.blue),
                 ),
-                child: ClipOval(
-                  child: userProvider.userModel?.userProfilePic?.isEmpty == true
-                      ? Image.network(
-                          userProvider.userModel!.userProfilePic.toString(),
-                          width: 90,
-                          height: 90,
-                          fit: BoxFit.cover,
-                        )
-                      : Image.asset('assets/images/profile.png'),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ClipOval(
+                    child: userProvider
+                                .userModel?.user?.profilePic?.isNotEmpty ==
+                            true
+                        ? Image.network(
+                            userProvider.userModel!.user!.profilePic.toString(),
+                            width: 50,
+                            height: 50,
+                            fit: BoxFit.cover,
+                          )
+                        : Image.asset(
+                            'assets/images/profile1.jpg',
+                            width: 50,
+                            height: 50,
+                            fit: BoxFit.cover,
+                          ),
+                  ),
                 ),
               ),
             ),

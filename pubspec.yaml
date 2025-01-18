@@ -56,6 +56,8 @@ dependencies:
   velocity_x: ^4.2.1
    # local storage
   shared_preferences: ^2.3.5
+  #  image picker pacakage
+  image_picker: ^1.1.2
 
 dev_dependencies:
   flutter_test:

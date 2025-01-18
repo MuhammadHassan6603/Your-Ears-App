@@ -1,14 +1,16 @@
 import 'dart:developer';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:velocity_x/velocity_x.dart';
 import 'package:your_ears_app/pages/sign_in/presentation/provider/login_provider.dart';
-import 'package:your_ears_app/routes/routes_imports.gr.dart';
 import 'package:your_ears_app/utils/color.dart';
+import 'package:your_ears_app/widgets/custom_text_field.dart';
 
 void showDialogBox(BuildContext context) {
   var logPro = Provider.of<LoginProvider>(context, listen: false);
+
+  final TextEditingController passwordController = TextEditingController();
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -29,80 +31,62 @@ void showDialogBox(BuildContext context) {
               fontSize: 12),
         ),
         actions: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          Column(
+            spacing: 10,
             children: [
-              GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    logPro.deleteAccount(context);
-                    // context.router.replace(SignUpRoute());
-                  },
-                  child: Text(
-                    "Yes",
-                    style: GoogleFonts.inter(
-                      color: AppColors.blackCOlor,
-                    ),
-                  )),
-              GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    log("Account deletion canceled.");
-                  },
-                  child: Text(
-                    "No",
-                    style: GoogleFonts.inter(
-                      color: AppColors.blackCOlor,
-                    ),
-                  )),
-              // ElevatedButton(
-              //   onPressed: () {
-              //     Navigator.of(context).pop();
-              //     // Add logic for deleting the account here
-              //     log("Account deletion confirmed.");
-              //   },
-              //   style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-              //   child: Text('Yes'),
-              // ),
-              // ElevatedButton(
-              //   onPressed: () {
-              //     Navigator.of(context).pop();
-              //     log("Account deletion canceled.");
-              //   },
-              //   style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
-              //   child: Text('No'),
-              // ),
+              Text(
+                'Please Enter Your password',
+                style: GoogleFonts.inter(
+                    color: AppColors.blackCOlor,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 15),
+              ),
+              CustomTextField(
+                text: 'password',
+                controller: passwordController,
+                isPass: true,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  GestureDetector(
+                      onTap: () async {
+                        await logPro.deleteAccount(
+                            context, passwordController.text);
+                        log('delete account ');
+                        VxToast.show(context,
+                            msg: ' delete account',
+                            bgColor: Colors.green,
+                            textColor: Colors.white);
+
+                        Navigator.of(context).pop();
+                      },
+                      child: Text(
+                        "Delete",
+                        style: GoogleFonts.inter(
+                          color: AppColors.h1Colors,
+                        ),
+                      )),
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        log("Account deletion canceled.");
+                      },
+                      child: Text(
+                        "cancle",
+                        style: GoogleFonts.inter(
+                          color: AppColors.blackCOlor,
+                        ),
+                      )),
+                ],
+              ),
             ],
           ),
         ],
       );
-
-      //  Dialog(
-      //   backgroundColor: Colors.white,
-      //   insetPadding: EdgeInsets.zero,
-      //   child: SizedBox(
-      //       width: getWidth(context) * 0.85,
-      //       height: getHeight(context) * 0.2,
-      //       child: Column(
-      //         children: [
-      //           Align(
-      //             alignment: Alignment.topRight,
-      //             child: GestureDetector(
-      //               onTap: () {
-      //                 Navigator.pop(context);
-      //               },
-      //               child: Padding(
-      //                 padding: const EdgeInsets.only(right: 15.0, top: 15),
-      //                 child: Icon(
-      //                   Icons.close,
-      //                   color: Color(0xff5A5A5A),
-      //                 ),
-      //               ),
-      //             ),
-      //           ),
-      //         ],
-      //       )),
-      // );
     },
   );
 }

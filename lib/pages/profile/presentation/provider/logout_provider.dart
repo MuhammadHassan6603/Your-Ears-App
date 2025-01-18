@@ -39,12 +39,15 @@ class AuthProvider with ChangeNotifier {
           'Authorization': 'Bearer $_token',
         },
       );
-
+      final sharedPref = SharedPrefHelper();
+      await sharedPref.removeString();
+      await sharedPref.removeUserModel();
       if (response.statusCode == 200) {
         _token = null;
-        final sharedPref = SharedPrefHelper();
+
         log("logout share pref  $_token ");
-        await sharedPref.remove(_token ?? "");
+        await sharedPref.removeString();
+        await sharedPref.removeUserModel();
         VxToast.show(context,
             msg: 'Logged out successfully',
             bgColor: Colors.green,

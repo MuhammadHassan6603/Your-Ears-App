@@ -1,16 +1,16 @@
+// ignore_for_file: non_constant_identifier_names
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:your_ears_app/pages/profile/presentation/provider/calendar_provider.dart';
 import 'package:your_ears_app/pages/profile/presentation/provider/logout_provider.dart';
 import 'package:your_ears_app/pages/profile/presentation/widget/delete_diog.dart';
-import 'package:your_ears_app/pages/profile/presentation/widget/profile_field.dart';
-import 'package:your_ears_app/pages/sign_in/presentation/provider/login_provider.dart';
+import 'package:your_ears_app/pages/profile/presentation/widget/edit_profile_screen.dart';
 import 'package:your_ears_app/utils/color.dart';
 import 'package:your_ears_app/utils/images.dart';
-import 'package:your_ears_app/widgets/custom_button.dart';
 
+@RoutePage()
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
   @override
@@ -19,41 +19,13 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
-  void initState() {
-    // TODO: implement initState
-    var userPro = Provider.of<LoginProvider>(context, listen: false);
-    fullname.text = userPro.userModel!.user!.name.toString();
-    email.text = userPro.userModel!.user!.email.toString();
-    phoneNumber.text = userPro.userModel!.user!.phone.toString();
-    city.text = userPro.userModel?.customer?.city?.isEmpty == true
-        ? userPro.userModel!.customer!.city!
-        : "";
-    postalcode.text =
-        userPro.userModel?.customer?.postalCode?.isNotEmpty == true
-            ? userPro.userModel!.customer!.postalCode!
-            : '';
-    _dobController.text =
-        userPro.userModel?.customer?.dateOfBirth?.isEmpty == true
-            ? userPro.userModel!.customer!.dateOfBirth!
-            : "";
-    super.initState();
-  }
-
-  final TextEditingController _dobController = TextEditingController();
-  final TextEditingController fullname = TextEditingController();
-  final TextEditingController email = TextEditingController();
-  final TextEditingController phoneNumber = TextEditingController();
-  final TextEditingController city = TextEditingController();
-  final TextEditingController postalcode = TextEditingController();
-  final TextEditingController changepassword = TextEditingController();
-  final TextEditingController Confirmpassword = TextEditingController();
-
-  @override
   Widget build(BuildContext context) {
-    var userPro = Provider.of<LoginProvider>(context, listen: false);
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
+
+      //  App bar
+
       appBar: AppBar(
         backgroundColor: AppColors.whiteColor,
         scrolledUnderElevation: 0,
@@ -115,19 +87,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: const Icon(
                 Icons.more_vert,
               )),
-          // Consumer<AuthProvider>(
-          //   builder: (context, authProvider, child) {
-          //     return GestureDetector(
-          //       onTap: () {
-          //         authProvider.logout(context);
-          //       },
-          //       child: Padding(
-          //         padding: const EdgeInsets.only(right: 15.0),
-          //         child: Icon(Icons.logout),
-          //       ),
-          //     );
-          //   },
-          // ),
         ],
         title: Text(
           'Profile',
@@ -140,129 +99,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: SingleChildScrollView(
         child: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                width: 130,
-                height: 130,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colors.blue)),
-                child: Center(
-                  child: Container(
-                    width: 110,
-                    height: 110,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.blue)),
-                    child: Center(
-                      child: ClipOval(
-                        child: userPro.userModel?.userProfilePic?.isNotEmpty ==
-                                true
-                            ? Image.network(
-                                userPro.userModel!.userProfilePic.toString(),
-                                width: 90,
-                                height: 90,
-                                fit: BoxFit.cover,
-                              )
-                            : Container(
-                                width: 90,
-                                height: 90,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                ),
-                                child:
-                                    Image.asset('assets/images/profile.png')),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 10),
-              Text(
-                userPro.userModel!.user!.name.toString(),
-                style: GoogleFonts.inter(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xff2c3131),
-                ),
-              ),
-              SizedBox(
-                height: 35,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  children: [
-                    profileField(controller: fullname, 'Full Name'),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    profileField(controller: email, 'Your Email'),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    profileField(controller: phoneNumber, 'Phone Number'),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      spacing: 20,
-                      children: [
-                        Expanded(child: profileField(controller: city, 'City')),
-                        Expanded(
-                            child: profileField(
-                                controller: postalcode, 'Postal Code'))
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "Enter Age ",
-                        style: GoogleFonts.inter(
-                            fontSize: 8,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.successfulltextColor),
-                      ),
-                    ),
-                    Consumer<DateProvider>(
-                      builder: (context, value, child) {
-                        return profileField('Date of Birth',
-                            isDateField: true,
-                            controller: _dobController, pickDate: () async {
-                          await value.pickDate(context);
-
-                          if (value.selectedDate != null) {
-                            _dobController.text =
-                                value.selectedDate.toString().split(' ').first;
-                          }
-                        }, onTap: () async {});
-                      },
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    profileField(controller: changepassword, 'Change Password'),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    profileField(
-                        controller: Confirmpassword, 'Confirm Password'),
-                    SizedBox(
-                      height: 60,
-                    ),
-                    CustomButton(text: "Save"),
-                    SizedBox(
-                      height: 20,
-                    ),
-                  ],
-                ),
-              ),
+              EditProfileScreen(),
             ],
           ),
         ),

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
     try {
       return await sharedPrefHelper.getUserModel();
     } catch (e) {
-      print("Error fetching user model: $e");
+      log("Error fetching user model: $e");
       return null;
     }
   }
@@ -75,14 +77,20 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: ClipOval(
-                child: userProvider.userModel?.userProfilePic?.isEmpty == true
-                    ? Image.network(
-                        userProvider.userModel!.userProfilePic.toString(),
-                        width: 40,
-                        height: 40,
-                        fit: BoxFit.cover,
-                      )
-                    : Image.asset('assets/images/profile.png'),
+                child:
+                    userProvider.userModel?.user?.profilePic?.isNotEmpty == true
+                        ? Image.network(
+                            userProvider.userModel!.user!.profilePic.toString(),
+                            width: 40,
+                            height: 40,
+                            fit: BoxFit.cover,
+                          )
+                        : Image.asset(
+                            'assets/images/profile1.jpg',
+                            width: 40,
+                            height: 40,
+                            fit: BoxFit.cover,
+                          ),
               ),
             ),
           ],

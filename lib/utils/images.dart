@@ -19,4 +19,5 @@ class AppImages {
   static const String loctionicon = "assets/icons/loction_icon.svg";
   static const String downarrowicon = "assets/icons/downword.svg";
   static const String invisibilityicon = "assets/icons/eye-open.svg";
+  static const String edit = "assets/icons/fi-rr-edit.svg";
 }

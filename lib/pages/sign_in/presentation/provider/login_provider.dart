@@ -43,12 +43,14 @@ class LoginProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
+        _token = data["token"];
+        log("userdata ${data}");
         Provider.of<AuthProvider>(context, listen: false)
             .setToken(data['token']);
         RegisterModel userData = RegisterModel.fromJson(data);
         log("user data ${userData.user}");
         userModel = userData;
-        _token = data['token'];
+
         final sharedPref = SharedPrefHelper();
         sharedPref.setUserModel(userData);
         log("$_token ");
@@ -105,9 +107,7 @@ class LoginProvider with ChangeNotifier {
 
 //   delete account function
 
-  Future<void> deleteAccount(
-    BuildContext context,
-  ) async {
+  Future<void> deleteAccount(BuildContext context, String password) async {
     log('delete acc api');
     final url = Uri.parse('https://portal.yourears.co.uk/api/profile/delete');
 
@@ -115,33 +115,39 @@ class LoginProvider with ChangeNotifier {
       final response = await http.delete(
         url,
         headers: {
-          'Authorization': 'Bearer $token',
+          // if (token != null)
+          'Authorization': 'Bearer ${userModel!.token}',
           'Content-Type': 'application/json',
         },
         body: jsonEncode({
-          'password': _token,
+          'password': password,
         }),
       );
+      log("token is ${_token}");
 
-      if (response.statusCode == 200) {
+      if (response.statusCode >= 200 || response.statusCode <= 300) {
         final sharedPref = SharedPrefHelper();
-        sharedPref.remove;
+        await sharedPref.removeString();
+        await sharedPref.removeUserModel();
+        log("remove model share pres $sharedPref.removeUserModel()");
+
+        context.router.replace(SignUpRoute());
         log('Account deleted successfully');
         VxToast.show(context,
             msg: 'Account deleted successfully',
             bgColor: Colors.green,
             textColor: Colors.white);
       } else {
-        log('Failed to delete account: ${response.body}');
+        log('Failed to delete account ${response.statusCode}: ${response.body}');
         VxToast.show(context,
-            msg: 'Failed to delete account: ${response.body}',
+            msg: 'Failed to delete account',
             bgColor: Colors.red,
             textColor: Colors.white);
       }
     } catch (e) {
       log('An error occurred: $e');
       VxToast.show(context,
-          msg: 'An error occurred: $e',
+          msg: 'Something went wrong',
           bgColor: Colors.red,
           textColor: Colors.white);
     }

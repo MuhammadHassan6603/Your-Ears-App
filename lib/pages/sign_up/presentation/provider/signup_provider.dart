@@ -15,7 +15,7 @@ class SignupProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   String? _token;
   String? get token => _token;
-
+  RegisterModel? _userModel;
 
   void setLoading(bool value) {
     _isLoading = value;
@@ -34,7 +34,6 @@ class SignupProvider with ChangeNotifier {
           'phone': phone,
           'password': password,
           'password_confirmation': passwordConfirmation,
-          
         },
       );
       if (response.statusCode == 200) {
@@ -92,5 +91,13 @@ class SignupProvider with ChangeNotifier {
     } finally {
       setLoading(false);
     }
+  }
+
+  //get user data
+  getUserData() async {
+    final sharedPref = SharedPrefHelper();
+    var data = await sharedPref.getUserModel();
+    _userModel = data;
+    notifyListeners();
   }
 }
