@@ -10,7 +10,7 @@ import 'package:your_ears_app/pages/sign_in/presentation/provider/login_provider
 import 'package:your_ears_app/pages/sign_up/presentation/provider/signup_provider.dart';
 
 class GridItems extends StatefulWidget {
-  const GridItems({Key? key}) : super(key: key);
+  const GridItems({super.key});
 
   @override
   State<GridItems> createState() => _GridItemsState();
@@ -68,7 +68,6 @@ class _GridItemsState extends State<GridItems> {
           return Center(child: Text('No services available'));
         } else {
           final services = snapshot.data!;
-
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
             child: Column(
@@ -79,10 +78,10 @@ class _GridItemsState extends State<GridItems> {
                     spacing: 15,
                     children: [
                       gridWidget(context, services[i].imageUrl ?? '',
-                          services[i].name ?? '', services[i].id!),
+                          services[i].name ?? '', services[i].id!,services[i].startTime!.toString(),services[i].endTime!.toString()),
                       if (i + 1 < services.length)
                         gridWidget(context, services[i + 1].imageUrl ?? '',
-                            services[i + 1].name ?? '', services[i + 1].id!),
+                            services[i + 1].name ?? '', services[i + 1].id!,services[i+1].startTime!.toString(),services[i+1].endTime!.toString()),
                     ],
                   ),
               ],
