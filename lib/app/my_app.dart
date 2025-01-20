@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+// import 'package:your_ears_app/pages/booking_details/presentation/provider/booking_provider.dart';
 import 'package:your_ears_app/pages/bottom_bar/presentation/provider/bottom_bar_provider.dart';
 import 'package:your_ears_app/pages/home/presentation/provider/drawer_provider.dart';
+import 'package:your_ears_app/pages/home/presentation/provider/service_id.dart';
 import 'package:your_ears_app/pages/profile/presentation/provider/calendar_provider.dart';
 import 'package:your_ears_app/pages/profile/presentation/provider/image_picker_provider.dart';
 import 'package:your_ears_app/pages/profile/presentation/provider/logout_provider.dart';
@@ -38,6 +40,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => DateProvider()),
         ChangeNotifierProvider(create: (_) => ImageProviderModel()),
         ChangeNotifierProvider(create: (_) => ProfileProviderUpdate()),
+        ChangeNotifierProvider(create: (_) => ServiceProvider()),
       ],
       child: MaterialApp.router(
         routerConfig: _appRouter.config(),

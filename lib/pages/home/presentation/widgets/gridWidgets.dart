@@ -1,13 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:your_ears_app/pages/home/presentation/provider/service_id.dart';
 import 'package:your_ears_app/routes/routes_imports.gr.dart';
 import 'package:your_ears_app/utils/color.dart';
 
-Widget gridWidget(BuildContext context, String imgPath, String text) {
+Widget gridWidget(BuildContext context, String imgPath, String text,int service_id) {
   return Expanded(
       child: InkWell(
         onTap: () {
+          Provider.of<ServiceProvider>(context, listen: false).setServiceId(service_id);
           context.router.push(BookingDetailsRoute());
         },
         child: Container(

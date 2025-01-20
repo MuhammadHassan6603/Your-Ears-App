@@ -182,6 +182,14 @@ class User {
   String? city;
   String? postalCode;
   String? dateOfBirth;
+  int? _customer_id;
+
+  int? get customer_id => _customer_id;
+
+  set customer_id(int? value) {
+    _customer_id = value;
+  }
+
 
   User({
     this.name,
@@ -191,7 +199,8 @@ class User {
     this.city,
     this.postalCode,
     this.dateOfBirth,
-  });
+    int? customer_id,
+  }) : _customer_id = customer_id;
 
   // Factory constructor to create an instance from JSON
   User.fromJson(Map<String, dynamic> json) {
@@ -202,6 +211,7 @@ class User {
     city = json['city'];
     postalCode = json['postal_code'];
     dateOfBirth = json['date_of_birth'];
+    customer_id = json['customer_id'];
   }
 
   // Method to convert the instance to JSON
@@ -214,6 +224,7 @@ class User {
     data['city'] = city;
     data['postal_code'] = postalCode;
     data['date_of_birth'] = dateOfBirth;
+    data['customer_id'] = customer_id;
     return data;
   }
 
@@ -226,6 +237,7 @@ class User {
     String? city,
     String? postalCode,
     String? dateOfBirth,
+    int? customer_id,
   }) {
     return User(
       name: name ?? this.name,
@@ -235,6 +247,7 @@ class User {
       city: city ?? this.city,
       postalCode: postalCode ?? this.postalCode,
       dateOfBirth: dateOfBirth ?? this.dateOfBirth,
+      customer_id: customer_id ?? this.customer_id,
     );
   }
 }

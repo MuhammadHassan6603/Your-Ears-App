@@ -54,23 +54,23 @@ class ServicesModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['parent_category_id'] = this.parentCategoryId;
-    data['name'] = this.name;
-    data['slug'] = this.slug;
-    data['description'] = this.description;
-    data['unavailable_dates'] = this.unavailableDates;
-    data['start_time'] = this.startTime;
-    data['end_time'] = this.endTime;
-    data['coupon'] = this.coupon;
-    data['price'] = this.price;
-    data['discounted_price'] = this.discountedPrice;
-    data['image'] = this.image;
-    data['active'] = this.active;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['image_url'] = this.imageUrl;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['parent_category_id'] = parentCategoryId;
+    data['name'] = name;
+    data['slug'] = slug;
+    data['description'] = description;
+    data['unavailable_dates'] = unavailableDates;
+    data['start_time'] = startTime;
+    data['end_time'] = endTime;
+    data['coupon'] = coupon;
+    data['price'] = price;
+    data['discounted_price'] = discountedPrice;
+    data['image'] = image;
+    data['active'] = active;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['image_url'] = imageUrl;
     return data;
   }
 }

@@ -75,20 +75,14 @@ class _GridItemsState extends State<GridItems> {
               spacing: 15,
               children: [
                 for (int i = 0; i < services.length; i += 2)
-                  Row(
+                  Row(  
                     spacing: 15,
                     children: [
-                      gridWidget(
-                        context,
-                        services[i].imageUrl ?? '',
-                        services[i].name ?? '',
-                      ),
+                      gridWidget(context, services[i].imageUrl ?? '',
+                          services[i].name ?? '', services[i].id!),
                       if (i + 1 < services.length)
-                        gridWidget(
-                          context,
-                          services[i + 1].imageUrl ?? '',
-                          services[i + 1].name ?? '',
-                        ),
+                        gridWidget(context, services[i + 1].imageUrl ?? '',
+                            services[i + 1].name ?? '', services[i + 1].id!),
                     ],
                   ),
               ],
